@@ -3,6 +3,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.stream.IntStream;
 
 /**
  * @author downey
@@ -43,6 +44,7 @@ public class MyArrayList<T> implements List<T> {
     @Override
     public boolean add(T element) {
         // TODO: FILL THIS IN!
+        array[size++] = element;
         return false;
     }
 
@@ -109,6 +111,11 @@ public class MyArrayList<T> implements List<T> {
     @Override
     public int indexOf(Object target) {
         // TODO: FILL THIS IN!
+        for (int i = 0; i < size; i++) {
+            if (equals(target, array[i])) {
+                return i;
+            }
+        }
         return -1;
     }
 
@@ -180,6 +187,11 @@ public class MyArrayList<T> implements List<T> {
     @Override
     public T remove(int index) {
         // TODO: FILL THIS IN!
+        array = (T[]) IntStream.range(0, size)
+                            .filter((idx) -> idx != index)
+                            .mapToObj(idx -> array[idx])
+                            .toArray();
+        size--;
         return null;
     }
 
@@ -200,6 +212,7 @@ public class MyArrayList<T> implements List<T> {
     @Override
     public T set(int index, T element) {
         // TODO: FILL THIS IN!
+        array[index] = element;
         return null;
     }
 
